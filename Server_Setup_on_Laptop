@@ -21,3 +21,12 @@ Generally 2gb RAM system should be used with 32bits, and for more then 2GB use 6
 - Server needs to have static IP address to be visible to internet
 
 Configure static IP at the time of booting the system -> https://academy.ehacking.net/courses/525438/lectures/9584253
+
+- It's important to setup SSH for the server to MyIP so that even if someone else had the key thay can't connect to it
+
+- Use AWS pem file to connect via Linux system to AWS ec2 instance
+
+- Configure non-root user on server https://academy.ehacking.net/courses/525438/lectures/9584258
+
+LAMP -> https://academy.ehacking.net/courses/525438/lectures/9584270
+

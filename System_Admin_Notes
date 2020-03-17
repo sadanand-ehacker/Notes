@@ -1,1 +1,142 @@
+Virtualbox Management -> https://academy.ehacking.net/courses/551622/lectures/10002215
+
+- Basic difference between Linux flavours is that Ubuntu or Debian based flavours use 'apt-get' and fedora or other same one
+uses the 'yum'
+
+# General cmds 
+
+- ls        		// To list the files present in directory
+- ls option_cmd directory_name      // syntax for ls cmd
+- ls Documents          // this will list all the files which r in Documents directory
+- ls -al                // this will show the hidden files and the details about all files
+- ls -ltr		// to list every thing in timely reverse order 
+- ls -li 		// to list the inodes 
+- ls -sh		// to display size in human readble format
+
+Note -> on doing cmd in home directory -> ls -ltr // u might see that the username and groupname for the user is same even after
+changing it and the reason for that the actual group of the user will always remain the username it is just now part of the another
+group to change it properly use the 
+
+- mkdir directory_name // to create the directory
+
+- rm filename                       // to remove a file
+- rm -r parent_directory_name       // this will remove the file and the directory's also
+
+- cp options_cmd src des        // 'cp' is used as copy command 'src' is the source from which we wants to copy and 'des' is
+                                // the destination where we wants to copy
+- cp file1 file2                // this will copy data of file1 to file2 and create file2 if it does not exist
+- cp file1 dir1                 // this will copy file1 to dir1 directory
+
+- mv options_cmd src des // syntax for mv
+- mv file1 file2 // this will move data and rename file and directories so here file1 will be renamed as file2 and if file2
+                 //  doesn't exist it will be created
+- mv file1 dir1 // this will move file1 to dir1 directory and if file1 exists then the data in it will be overwritten
+- mv -v file1 dir1      // for the verbose mode
+
+Note -> If U get permission denied while listing of files with any command then use 'sudo' with that cmd
+
+- cmd -> echo $SHELL , o/p -> the path to the shell which is being used
+
+- cd /root/Desktop  // this navigation is also correct, no need to 1st execute cd ~ then go to Desktop
+- ls /home/          // to know the users
+- cd /home/username  // to navigate to userbased directory
+
+- pwd       // This cmd shows the current working directory
+
+- whoami // to find who is logged in the system at current
+- visudo  /etc/sudoers  // it is to edit file which is configuration file that allows u to add or remove the rights to run cmds
+  look for the string 'wheel' the users in this group can run all cmds -?? 
+- hostname // It is used to obtain the DNS(Domain Name System) name and set the system's hostname or NIS(Network Information System)
+  domain name. A hostname is a name which is given to a computer and it attached to the network. Its main purpose is to uniquely
+  identify over a network.
+- hostnamectrl -set-hostname newhostname // to change the hostname
+  place where the changes r done for hostname -> /etc/hostname
+
+
+- cat /etc/os-release // to get info of OS
+- uname -a // for kernel info
+- sudo dmidecode // to get proper and detailed info for the system
+
+
+- history // to know the cmds executed
+- !cmd_no. // the history cmd gives the cmd no. for the cmds we can use it's no. to execute the cmd
+- path for the history cmds saved -> home/username/.bash_history
+
+
+# User Account Management
+
+- cat /etc/group // to list the groups
+- cat /etc/shadow // it is for the password of the users we create it
+- less /etc/passwd 	// to list the users and follow link to understand the logs ->
+	https://linuxize.com/post/how-to-list-users-in-linux/
+
+- 'passwd' cmd allows u to change the password for the user
+- sudo passwd user_name // now u can change the password for the entered user if u enter username as root then it will
+  change the password for root 
+
+- 'sudo' cmd allows extra privilages as administrator or more then normal user
+- 'sudo' infront of any cmd will enhance the privilage criteria for that cmd
+- su - // to become root user
+- su username // to change user
+
+- Adding a New Non-Root User in Kali Linux -> https://thecrazybastard.com/how-to-add-a-new-user-in-kali-linux/
+
+- 'userdel' cmd is used to delete the user
+- sudo userdel user_name // it will delete the user but it will not delete the directory of the user which u can see by using          
+  cmd -> ls /home/, Hence the user will be deleted but his data will not
+- sudo userdel -r user_name   // this will delete the home directory also with the user
+- sudo rm -r /home/mark/      // this will remove all the data of the user, So use it carefully
+
+- 'useradd' cmd is used to create a user
+- usermod -G groupname username // to change the group for a user
+cmd imp -> useradd -g groupname -s /bin/bash -c "Description msg" -m -d /home/username username // this cmd will done the all work
+together mostly used in IT by system admin to add user
+    // -m is going to create a default home directory for this
+    // user, -s is used for allowing the user to use the shell
+    // which we provide and here it is bash 
+    // -g is the default user flag and user will be assigned to 
+    // the group u mention, always use -g flag with the 'users'
+    // group, -c flag is used for providing the comments
+
+- groups                 // this will show u that to which groups ur current user is connected too.
+- sudo groupadd name_of_group           // to add the new group
+- sudo groupdel name_of_group           // to delete the group
+- sudo gpasswd -a user_name group_name  // assign user to a group
+- sudo gpasswd -d user_name group_name // to remove user from the group
+cmd -> chgrp -R groupname username // this will make changes to every folder of the username 
+
+- login -p username // to login into system
+
+
+# Monitor User ->
+- who // to see how many people r logged in
+- w // it is same work as 'who' but gives more detailed info related
+
+- last // this will tell u about the every user logged in ever in system, for not whole list just unique names of all users logged
+  so far use cmd -> last | awk '{print $1}' | sort | uniq
+- finger // it is to do trace of ur user where it is coming from what kind of protocol he is using
+- id username //to see uid and gid and to know whether user is existing or not
+
+- uptime - this tells how long the system being up for and load, users etc. Screenshot(521)
+- users // to list the users logged in the system
+- wall // this will broadcast or msg to anyone who is logged in the linux system -??
+- write username_to_send_them // it for specific user to another -??
+
+Note -> In Linux their r 2 types of accounts ->
+- local account // which is created normally with above cmds
+- Domain/Directory account // when u need to add user for access to 1000 servers then we use these accounts, the client will send
+  a send a request to the Directory server to authenticate and in response the server tells that the user is authenicated and allowed
+  to log in, in windows their is AD(Active Directory) here u do the same as u create a Account in Active Directory of the Windows
+  Server, the protocol used for this task is LDAP protocol to authenticate against a directory
+Diff bw AD, LDAP, IDM, WinBIND, OpenLDAP -> https://academy.ehacking.net/courses/551622/lectures/10003046
+
+# Types of help commands -> Screenshot(415)
+- man any_cmd (this gives the manual of the cmd) // we can also use --help in the place of 'man' Ex -> any_cmd --help
+
+- 'whatis' cmd will display short manual page discription for cmd -> whatis ls - ??
+
+- which cmd is used to return the path name of a file or a command which we use with this 'which' cmd
+- which ls //to know the location of the ls cmd
+- In bash scripting it is gud practice to use the full path name as we should use -> '/bin/ls' instead of just 'ls' , bcz some
+  OS recognize the 'ls' cmd and some will require u to enter the full path for the 'ls' cmd
 

@@ -137,6 +137,40 @@ files, thus locate is much faster then find, but can be inaccurate if the databa
 
 - tac filename // tac is opposite of cat as it displays the data from top to bottom
 
+- cat filename|sed 's/t/T'	// here in 's/t/T' the 's' is for substitude hence it will replace the 't' with 'T' for every
+		first 't' char in the file
+		Note -> These changes will not be saved
+
+- sed 's/t/T/g' filename // here in 's/t/T/g' the 'g' which is global is to tell that substitude every 't' character with 'T'
+
+- sed -i 's/t/T/g' filename // here in 'i' will make the changes to the original file
+Sed tutorial -> https://academy.ehacking.net/courses/551622/lectures/10003044
+
+- 'grep'(global regural expression print), 'grep' cmd processes text line by line and print any line which matches the 
+  specified pattern, So 'grep' cmd could be used to search some kind of pattern or word or sentence in a text file or
+  no. of text file
+- grep "word_or_text_to_search" file_name // this cmd will search the entered word from the input file, and the 'grep' cmd is     
+                                         // sensitive case hence the exact word or text would be searched 
+- grep -i "word_or_text_to_search" file_name  // to make the search not case-sensitive
+- grep -n "word_or_text_to_search" file_name  // to print the line no. with output 
+- grep -c "word_or_text_to_search" file1 file2 file3  // to search in multiple files, -c will count the word or text
+- grep -n "word_or_text_to_search" *      // to search from all the files
+- grep -nv "word_or_text_to_search" file_name    // this will o/p all the lines which doesn't contain the input text
+
+- 'less' cmd is used for reading the file or to search something inside the file, 'less' is better then the cat cmd to read
+  the  file contents as the size of the opened terminal window will not create any hurdle to display the data which was too
+  big and we were not able to scroll further in terminal
+- less filename     // to read the data from the file and scroll the content of file as u proceed by scrolling
+    - press space after executing above cmd will display the data on terminal page by page
+    - press shift + B to go up the pages
+    - press shift + G to go at end of the file
+    - press g       // this go at the top of the file
+    - /book         // this is search for the 'book' keyword in file and to go to next 'book' in file press 'n'
+    - ?book         // to search for 'book' in file from down to up
+    - press 'q' to quit from less
+
+
+
 # Process Management 
 
 Note -> - Applications and Linux r also known as Service
